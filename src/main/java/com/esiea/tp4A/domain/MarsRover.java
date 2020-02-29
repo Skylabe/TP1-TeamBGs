@@ -18,3 +18,4 @@ public interface MarsRover {
         return Position.of(0, 0, Direction.NORTH);
     }
 }
+

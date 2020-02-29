@@ -1,29 +1,24 @@
-package com.esiea.tp4A;
+import java.util.Set;
+import java.util.HashSet;
 
-import static org.assertj.core.api.Assertions.assertThat;
+public class PlanetMapImpl implements PlanetMap {
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-
-public class PlanetMapImplTest {
-
-    public PlanetMapImplTest() {
+    public PlanetMapImpl() {
     // implementer taille map
         
     }
     
-//    @ParameterizedTest
-//    final void testobstaclePositions(){
-//        Set<Position> mapObstacles = new HashSet<Position>();
+    @Override
+    public Set<Position> obstaclePositions(){
+        Set<Position> mapObstacles = new HashSet<Position>();
 //        for (int x = 10; x < 20; x++) {
 //            for (int y = 10; y < 20; y++)
 //                mapObstacles.add(Position.of(x, y, Direction.NORTH));
 //        }
-//        return mapObstacles;
-//    }
+        return mapObstacles;
+    }
 //    
-    
-//    @ParameterizedTest
+//    
 //    public static void main(String[] args) {
 //        PlanetMapImpl p = new PlanetMapImpl();
 //        Set<Position> a = p.obstaclePositions();
@@ -33,3 +28,4 @@ public class PlanetMapImplTest {
 //        System.out.println(a.getClass().getName());
 //    }
 }
+
