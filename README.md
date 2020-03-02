@@ -7,9 +7,9 @@
 
 ## Launch the project
 The following command show how to compile the project using javac:  
-```javac -cp src/main/java/com/esiea/tp4A/domain -d src/main/java/com/esiea/tp4A/domain/bin/ src/main/java/com/esiea/tp4A/domain/impl/*.java```  
+```javac -cp "src/main/java/com/esiea/tp4A/domain/bin" -d src/main/java/com/esiea/tp4A/domain/bin/ src/main/java/com/esiea/tp4A/domain/*.java src/main/java/com/esiea/tp4A/domain/impl/*.java```  
 Next, you can lauch the project as follows:  
-```java -cp src/main/java/com/esiea/tp4A/domain/bin MarsRoverImpl```
+```java -cp src/main/java/com/esiea/tp4A/domain/bin com.esiea.tp4A.MarsRoverImpl x y direction```
 
 ## Launch the tests
 Test all the project:  

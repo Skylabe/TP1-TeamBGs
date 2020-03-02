@@ -1,3 +1,6 @@
 # maven generated directory
 target/
 
+#class files
+*.class
+
