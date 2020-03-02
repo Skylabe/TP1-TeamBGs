@@ -1,4 +1,4 @@
-package com.esiea.tp4A.domain.impl;
+package com.esiea.tp4A;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

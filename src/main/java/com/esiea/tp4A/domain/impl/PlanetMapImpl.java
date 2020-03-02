@@ -1,3 +1,5 @@
+package com.esiea.tp4A;
+
 import java.util.Set;
 import java.util.HashSet;
 

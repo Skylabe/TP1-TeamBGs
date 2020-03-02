@@ -1,3 +1,4 @@
+package com.esiea.tp4A;
 
 public interface Position {
     

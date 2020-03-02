@@ -1,4 +1,4 @@
-package com.esiea.tp4A.domain.impl;
+package com.esiea.tp4A;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,22 +9,16 @@ class MarsRoverImplTest {
 
     @ParameterizedTest
     @CsvSource({
-        "1, 1, 2",
-        "4, 7, 11"
+        "1, 1, NORTH",
+        "1, 1, SOUTH",
+        "1, 1, EAST",
+        "1, 1, WEST",
     })
-    void testMain(int x, int y, int D) {
-        new MarsRoverImpl();
-        MarsRoverImpl.main("1", "2");
-        assertEquals(x, y);
-    }
-
-    @ParameterizedTest
-    @CsvSource({
-        "1, 1, 2",
-        "4, 7, 11"
-    })
-    void testInitialize(int x, int y, int D) {
-        assertEquals(x, y);
+    void testMain(String x, String y, String d) {
+        String[] args = {x, y, d};
+        MarsRoverImpl.main(args);
+        //assertEquals(x, y);
+        //"{1, 1, NORTH}"
     }
 
 //    default MarsRover testUpdateMap(PlanetMap map) {
