@@ -6,7 +6,7 @@ import java.util.HashSet;
 public class PlanetMapImpl implements PlanetMap {
 
     public PlanetMapImpl() {
-    // implementer taille map
+        // a voir pour faire evoluer
         
     }
     
@@ -19,15 +19,11 @@ public class PlanetMapImpl implements PlanetMap {
 //        }
         return mapObstacles;
     }
-//    
-//    
-//    public static void main(String[] args) {
-//        PlanetMapImpl p = new PlanetMapImpl();
-//        Set<Position> a = p.obstaclePositions();
-//        /*for (Position pos : a) {
-//            System.out.println(a.getClass().getName());
-//        }*/
-//        System.out.println(a.getClass().getName());
-//    }
+    
+    // taille totale de la map (pour les delimitations)
+    public int[] getSize() {
+        int[] size = {100, 100};
+        return size;
+    }
 }
 

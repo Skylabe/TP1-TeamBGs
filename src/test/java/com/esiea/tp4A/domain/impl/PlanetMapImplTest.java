@@ -1,16 +1,14 @@
 package com.esiea.tp4A;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class PlanetMapImplTest{
-
-    public PlanetMapImplTest() {
-    // implementer taille map
-        
-    }
+    private PlanetMapImpl planet = new PlanetMapImpl();
     
 //    @ParameterizedTest
 //    final void testobstaclePositions(){
@@ -22,15 +20,13 @@ class PlanetMapImplTest{
 //        return mapObstacles;
 //    }
 //    
-    
-//    @ParameterizedTest
-//    public static void main(String[] args) {
-//        PlanetMapImpl p = new PlanetMapImpl();
-//        Set<Position> a = p.obstaclePositions();
-//        /*for (Position pos : a) {
-//            System.out.println(a.getClass().getName());
-//        }*/
-//        System.out.println(a.getClass().getName());
-//    }
+
+    @Test
+    void testGetSize() {
+        int[] size = planet.getSize();
+        assertEquals(size.length, 2);
+        for (int dim : size)
+            assertTrue(dim > 0);
+    }
 }
 
