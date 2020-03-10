@@ -7,12 +7,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class MarsRoverImplTest {
 
+    // Permet de tester le constructeur
     @ParameterizedTest
     @CsvSource({
         "1, 1, NORTH",
         "1, 1, SOUTH",
         "1, 1, EAST",
         "1, 1, WEST",
+        "-51, 38, TEST",
     })
     void testMain(String x, String y, String d) {
         String[] args = {x, y, d};
@@ -29,8 +31,15 @@ class MarsRoverImplTest {
 //        return this;
 //    }
 
-//    default Position testMove(String command) {
-//        return Position.of(0, 0, Direction.NORTH);
-//    }
+    @ParameterizedTest
+    @CsvSource({
+        "f, 1, 1, NORTH, 1, 2, NORTH",
+        "b, 1, 1, NORTH, 1, 0, SOUTH",
+        "f, 1, 1, NORTH, 1, 2, NORTH"
+    })
+    void testMove(String command, int x) {
+//        Position pos = Position.of();
+//        marsRover
+    }
 }
 
