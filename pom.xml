@@ -8,6 +8,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <exec.mainClass>com.esiea.tp4A.MarsRoverImpl</exec.mainClass>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
@@ -63,6 +64,14 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <includePluginDependencies>true</includePluginDependencies>
+                    <mainClass>com.esiea.tp4A.MarsRoverImpl</mainClass>
+                    <arguments>
+                        <argument>configFile</argument>
+                        <argument>properties</argument>
+                    </arguments>
+                </configuration>
             </plugin>
         </plugins>
     </build>
