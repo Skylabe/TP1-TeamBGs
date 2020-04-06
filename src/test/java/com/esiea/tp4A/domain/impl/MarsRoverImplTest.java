@@ -15,16 +15,21 @@ class MarsRoverImplTest {
     @CsvFileSource(resources = "/MarsRoverImplStart.csv")
     void testMain(String x, String y, String d) {
         String[] args = {x, y, d};
+        for (int idx = 0; idx < 3; idx++) {
+            if (args[idx].equals("EMPTY"))
+                args[idx] = "";
+        }
         // Simule l'input de l'utilisateur, possibilite d'ajouter les inputs a executer en argument depuis un csv dedie
         // dans src/main/resources
         String userInput = "end\r\n";
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        System.out.println(x+y+d);
         MarsRoverImpl.main(args);
     }
 
     // Permet de tester le constructeur
     @ParameterizedTest
-    @CsvFileSource(resources="/MarsRoverImplStart.csv", numLinesToSkip=1)
+    @CsvFileSource(resources="/MarsRoverImplStart.csv", numLinesToSkip=2)
     void testMarsRoverImpl(int x, int y, Direction d) {
         MarsRoverImpl marsRover = new MarsRoverImpl(x, y, d);
         assertEquals(x, marsRover.position.getX());
@@ -40,11 +45,15 @@ class MarsRoverImplTest {
 //        return this;
 //    }
 
-    /*@ParameterizedTest
-    @CsvFileSource(resources="/MarsRoverImplMove.csv", numLinesToSkip=1)
-    void testMove(String command, int x) {
-        Position pos = Position.of();
-        marsRover
-    }*/
+    @ParameterizedTest
+    @CsvFileSource(resources="/MarsRoverImplMove.csv")
+    // resultats attendus en parametre
+    void testMove(String command, int x, int y, Direction d) {
+        MarsRoverImpl rover = new MarsRoverImpl(0, 0, Direction.NORTH);
+        Position pos = rover.move(command);
+        assertEquals(x, pos.getX());
+        assertEquals(y, pos.getY());
+        assertEquals(d, pos.getDirection());
+    }
 }
 

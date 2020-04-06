@@ -20,6 +20,8 @@ public class MarsRoverImpl implements MarsRover {
 
 // checker ici si la position retournee par move appartient a l'un des obstacles de la map
 // Si non, affecter a "this.position" la valeur retournee par move
+// Si la taille de la planete fait 100x100 et que le rover passe de (0,50,N) a 51, la fonction doit se charger de mettre
+// -49 a la place
 //    default MarsRover updateMap(PlanetMap map) {
 //        return this;
 //    }
@@ -29,7 +31,28 @@ public class MarsRoverImpl implements MarsRover {
 //    }
 
     public Position move(String command) {
-        return Position.of(0, 0, Direction.NORTH);
+        int[] xy = {position.getX(), position.getY()};
+        Direction d = position.getDirection();
+        for (int idx = 0; idx < command.length(); idx++) {
+            int dirIdx = d.ordinal();
+            int inc = (dirIdx < 2) ? -1 : 1;
+            switch (command.charAt(idx)) {
+                case 'f':
+                    inc = inc * -1;
+                case 'b':
+                    xy[(dirIdx + 1) % 2] = xy[(dirIdx + 1) % 2] + inc;
+                    break;
+                case 'l':
+                    dirIdx = (dirIdx == 0) ? 3 : (dirIdx - 1);
+                    d = Direction.values()[dirIdx];
+                    //d = Direction.values()[(dirIdx - 1) % 4 + 4];
+                    break;
+                case 'r':
+                    d = Direction.values()[(dirIdx + 1) % 4];
+                    break;
+            }
+        }
+        return Position.of(xy[0], xy[1], d);
     }
     
     public static void main(String[] args) {
@@ -51,7 +74,7 @@ public class MarsRoverImpl implements MarsRover {
                 newCommand = scan.nextLine();
                 rover.move(newCommand);
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | java.lang.ArrayIndexOutOfBoundsException | java.lang.NullPointerException e) {
             System.out.println("Argument(s) saisi(s) invalide(s)");
         }
     }
