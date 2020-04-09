@@ -1,0 +1,7 @@
+0, 1, NORTH, f
+0, -1, NORTH, b
+0, 0, WEST, l
+0, 0, EAST, r
+-1, 1, WEST, flf
+-1, -1, SOUTH, blfl
+1, 1, SOUTH, brblfrffrb
