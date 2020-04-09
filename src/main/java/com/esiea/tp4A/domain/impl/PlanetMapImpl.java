@@ -4,10 +4,11 @@ import java.util.Set;
 import java.util.HashSet;
 
 public class PlanetMapImpl implements PlanetMap {
+    private int[] size = new int[2];
 
-    public PlanetMapImpl() {
+    public PlanetMapImpl(int[] size) {
         // a voir pour faire evoluer
-        
+        this.size = size;
     }
     
     @Override
@@ -22,7 +23,6 @@ public class PlanetMapImpl implements PlanetMap {
     
     // taille totale de la map (pour les delimitations)
     public int[] getSize() {
-        int[] size = {100, 100};
         return size;
     }
 }
