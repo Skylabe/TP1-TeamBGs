@@ -8,7 +8,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class PlanetMapImplTest{
-    private PlanetMapImpl planet = new PlanetMapImpl();
+    private int[] planetDims = {10, 10};
+    private PlanetMapImpl planet = new PlanetMapImpl(planetDims);
     
 //    @ParameterizedTest
 //    final void testobstaclePositions(){
