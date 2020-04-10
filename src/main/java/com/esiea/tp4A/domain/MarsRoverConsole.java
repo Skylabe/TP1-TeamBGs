@@ -2,18 +2,26 @@ package com.esiea.tp4A;
 
 import java.lang.Integer;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class MarsRoverConsole {
+    private final MarsRoverImpl rover;
+    private final PlanetMapImpl planet;
+    private final Scanner scan;
 
-    public MarsRoverConsole(int x, int y, Direction d, int planetWidth, int planetHeight) {
+    public MarsRoverConsole(int x, int y, Direction d, int planetWidth, int planetHeight, String[] coordsObstacles) {
         int[] planetDims = {planetWidth, planetHeight};
-        PlanetMapImpl planet = new PlanetMapImpl(planetDims);
-        MarsRoverImpl rover = new MarsRoverImpl(x, y, d, planet);
-        Scanner scan = new Scanner(System.in);
+        planet = new PlanetMapImpl(planetDims);
+        planet.setObstaclePositions(coordsObstacles);
+        rover = new MarsRoverImpl(x, y, d, planet);
+        scan = new Scanner(System.in);
+        launch();
+    }
+    
+    public void launch() {
         System.out.println("f avancer\nb reculer\nl pivoter a gauche\nr pivoter a droite\n'end' pour stopper");
-        Position newPos;
-        String newCommand = "";
-        // entrer "end" pour stopper le programme s'applique aussi dans les tests'
+        Position newPos; String newCommand = "";
+        // entrer "end" pour stopper le programme s'applique aussi dans les tests
         while (!newCommand.equals("end")) {
             newCommand = scan.nextLine();
             newPos = rover.move(newCommand);
@@ -31,9 +39,9 @@ public class MarsRoverConsole {
     
     public static void main(String[] args) {
         try{
+            String[] coordsObstacles = Arrays.copyOfRange(args, 5, args.length);
             new MarsRoverConsole(Integer.parseInt(args[0]), Integer.parseInt(args[1]), stringToDirection(args[2]),
-            Integer.parseInt(args[3]), Integer.parseInt(args[4]));
-            //new MarsRoverConsole(Integer.parseInt(args[0]), Integer.parseInt(args[1]), stringToDirection(args[2]), 10, 10);
+            Integer.parseInt(args[3]), Integer.parseInt(args[4]), coordsObstacles);
         } catch (NumberFormatException | java.lang.ArrayIndexOutOfBoundsException | java.lang.NullPointerException e) {
             System.out.println("Argument(s) saisi(s) invalide(s)");
         }
