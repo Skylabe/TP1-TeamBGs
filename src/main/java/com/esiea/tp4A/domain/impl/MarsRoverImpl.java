@@ -2,11 +2,11 @@ package com.esiea.tp4A;
 
 public class MarsRoverImpl implements MarsRover {
     private PlanetMapImpl map;
-    private Position position; // remplacer par getter/setter
+    private Position position;
 
-    public MarsRoverImpl(int x, int y, Direction dir, int[] sizeMap) {
+    public MarsRoverImpl(int x, int y, Direction dir, PlanetMapImpl map) {
         position = Position.of(x, y, dir);
-        map = new PlanetMapImpl(sizeMap);
+        this.map = map;
         //this.initialize(position);
     }
 
@@ -33,7 +33,7 @@ public class MarsRoverImpl implements MarsRover {
         int[] xy = {position.getX(), position.getY()};
         Direction d = position.getDirection();
         for (int idx = 0; idx < command.length(); idx++) {
-            int dirIdx = d.ordinal(), inc = (dirIdx < 2) ? -1 : 1;
+            int dirIdx = d.ordinal(), inc = (dirIdx < 2) ? -1 : 1; // juste pour les deux premiers cas
             switch (command.charAt(idx)) {
                 case 'f':
                     inc = inc * -1;
@@ -49,24 +49,7 @@ public class MarsRoverImpl implements MarsRover {
                     break;
             }
         }
-        xy = onSphericalGrid(xy); // voir apres impl initialize
-        return Position.of(xy[0], xy[1], d);
-    }
-    
-    public int[] onSphericalGrid(int[] posXY) {
-        int[] adaptPosXY = posXY.clone(), planetDims = map.getSize();
-        for (int idx = 0; idx < 2; idx++) {
-            adaptPosXY[idx] = adaptPosXY[idx] % planetDims[idx];
-            if ((posXY[idx] < 0) && (posXY[idx] < adaptPosXY[idx]))
-                adaptPosXY[idx]++;
-            if (adaptPosXY[idx] == -(planetDims[idx] / 2)) // peut etre imbrique dans la condition (posXY[idx] < 0)
-                adaptPosXY[idx] = planetDims[idx] / 2;
-            else if (Math.abs(adaptPosXY[idx]) > (planetDims[idx] / 2)) {
-                int sign = (posXY[idx] > 0) ? -1 : 1;
-                adaptPosXY[idx] = sign * planetDims[idx] % adaptPosXY[idx];
-            }
-        }
-        return adaptPosXY;
+        return Position.of(map.convert(xy[0], 0), map.convert(xy[1], 1), d); // tester ca aussi
     }
     
     public Position getPosition() {

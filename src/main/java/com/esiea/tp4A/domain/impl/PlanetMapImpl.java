@@ -4,26 +4,35 @@ import java.util.Set;
 import java.util.HashSet;
 
 public class PlanetMapImpl implements PlanetMap {
-    private int[] size = new int[2];
+    private final int[] size;
+    private Set<Position> obstacles = new HashSet<Position>();
 
     public PlanetMapImpl(int[] size) {
-        // a voir pour faire evoluer
         this.size = size;
+    }
+
+    public void setObstaclePositions(String[] args) {
+        for (int idx = 0; idx < args.length; idx += 2)
+            obstacles.add(Position.of(Integer.parseInt(args[idx]), Integer.parseInt(args[idx + 1]), Direction.NORTH));
     }
     
     @Override
-    public Set<Position> obstaclePositions(){
-        Set<Position> mapObstacles = new HashSet<Position>();
-//        for (int x = 10; x < 20; x++) {
-//            for (int y = 10; y < 20; y++)
-//                mapObstacles.add(Position.of(x, y, Direction.NORTH));
-//        }
-        return mapObstacles;
+    public Set<Position> obstaclePositions() {
+        return obstacles;
     }
     
-    // taille totale de la map (pour les delimitations)
     public int[] getSize() {
         return size;
+    }
+    
+    public int convert(int coord, int axisIdx) {
+        int convCoord = coord % size[axisIdx];
+        if ((coord < 0) && (coord < convCoord)) convCoord++;
+        if (convCoord == -(size[axisIdx] / 2)) convCoord = size[axisIdx] / 2;
+        else if (Math.abs(convCoord) > (size[axisIdx] / 2)) {
+            int sign = (coord > 0) ? -1 : 1;
+            convCoord = sign * size[axisIdx] % convCoord;
+        } return convCoord;
     }
 }
 
