@@ -12,7 +12,7 @@ You can found it [here](https://github.com/ledoyen/tp-java/blob/master/projet/4A
 The following command show how to compile the project using javac:  
 ```javac -cp "src/main/java/com/esiea/tp4A/domain/bin" -d src/main/java/com/esiea/tp4A/domain/bin/ src/main/java/com/esiea/tp4A/domain/*.java src/main/java/com/esiea/tp4A/domain/impl/*.java```  
 Next, you can lauch the project as follows:  
-```java -cp src/main/java/com/esiea/tp4A/domain com.esiea.tp4A.MarsRoverConsole x y direction```
+```java -cp src/main/java/com/esiea/tp4A/domain com.esiea.tp4A.MarsRoverConsole x y direction [width map] [height map]```
 
 ## Launch the tests
 Test all the project:  

@@ -1,15 +1,13 @@
 package com.esiea.tp4A;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 class PlanetMapImplTest{
-    private int[] planetDims = {10, 10};
-    private PlanetMapImpl planet = new PlanetMapImpl(planetDims);
     
 //    @ParameterizedTest
 //    final void testobstaclePositions(){
@@ -24,10 +22,20 @@ class PlanetMapImplTest{
 
     @Test
     void testGetSize() {
-        int[] size = planet.getSize();
-        assertEquals(size.length, 2);
-        for (int dim : size)
-            assertTrue(dim > 0);
+        int[] planetDims = {10, 10};
+        PlanetMapImpl planet = new PlanetMapImpl(planetDims);
+        assertArrayEquals(planetDims, planet.getSize());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources="/planetMapImplConvert.csv")
+    void testConvert(int coord, int excpectedCoord, int planetDim) {
+        for (int idx = 0; idx < 1; idx++) {
+            int[] planetDims = {planetDim, 10};
+            PlanetMapImpl planet = new PlanetMapImpl(planetDims);
+            int retCoord = planet.convert(coord, idx);
+            assertEquals(excpectedCoord, retCoord);
+        }
     }
 }
 

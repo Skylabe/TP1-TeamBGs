@@ -4,10 +4,10 @@ import java.util.Set;
 import java.util.HashSet;
 
 public class PlanetMapImpl implements PlanetMap {
-    private int[] size = new int[2];
+    private final int[] size;
 
     public PlanetMapImpl(int[] size) {
-        // a voir pour faire evoluer
+        // METTRE LES OBSTACLES C'EST RAPIDE VOIR TESTS
         this.size = size;
     }
     
@@ -24,6 +24,16 @@ public class PlanetMapImpl implements PlanetMap {
     // taille totale de la map (pour les delimitations)
     public int[] getSize() {
         return size;
+    }
+    
+    public int convert(int coord, int axisIdx) {
+        int convCoord = coord % size[axisIdx];
+        if ((coord < 0) && (coord < convCoord)) convCoord++;
+        if (convCoord == -(size[axisIdx] / 2)) convCoord = size[axisIdx] / 2;
+        else if (Math.abs(convCoord) > (size[axisIdx] / 2)) {
+            int sign = (coord > 0) ? -1 : 1;
+            convCoord = sign * size[axisIdx] % convCoord;
+        } return convCoord;
     }
 }
 

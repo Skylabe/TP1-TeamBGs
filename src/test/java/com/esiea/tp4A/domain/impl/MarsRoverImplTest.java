@@ -3,11 +3,12 @@ package com.esiea.tp4A;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 class MarsRoverImplTest {
+    int[] planetDims = {5, 5};
+    PlanetMapImpl planet = new PlanetMapImpl(planetDims);
 
     // pas besoin de tester juste pour avoir des tests plus propres
     boolean posEquals(Position posRef, Position posComp) {
@@ -22,9 +23,8 @@ class MarsRoverImplTest {
 
     @ParameterizedTest
     @CsvFileSource(resources="/MarsRoverImpl.csv")
-    void testMarsRoverImpl(int x, int y, Direction d) { // ajouter taille planete
-        int[] planetDims = {10, 10};
-        MarsRoverImpl rover = new MarsRoverImpl(x, y, d, planetDims);
+    void testMarsRoverImpl(int x, int y, Direction d) {
+        MarsRoverImpl rover = new MarsRoverImpl(x, y, d, planet);
         assertTrue(posEquals(Position.of(x, y, d), rover.getPosition()));
     }
 
@@ -40,21 +40,9 @@ class MarsRoverImplTest {
     @ParameterizedTest
     @CsvFileSource(resources="/MarsRoverImplMove.csv")
     void testMove(int x, int y, Direction d, String command) {
-        int[] planetDims = {5, 5};
-        MarsRoverImpl rover = new MarsRoverImpl(0, 0, Direction.NORTH, planetDims);
+        MarsRoverImpl rover = new MarsRoverImpl(0, 0, Direction.NORTH, planet);
         Position pos = rover.move(command);
         assertTrue(posEquals(Position.of(x, y, d), pos));
-    }
-
-    @ParameterizedTest
-    @CsvFileSource(resources="/MarsRoverImplOnSphericalGrid.csv")
-    void testOnSphericalGrid(int x, int y, int resX, int resY, int planetWidth, int planetHeight) {
-        int[] posXY = {x, y};
-        int[] resPosXY = {resX, resY};
-        int[] planetDims = {planetWidth, planetHeight};
-        MarsRoverImpl rover = new MarsRoverImpl(0, 0, Direction.NORTH, planetDims);
-        int[] retPosXY = rover.onSphericalGrid(posXY);
-        assertArrayEquals(resPosXY, retPosXY);
     }
 }
 
