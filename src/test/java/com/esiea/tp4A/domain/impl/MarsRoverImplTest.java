@@ -2,6 +2,8 @@ package com.esiea.tp4A;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -32,6 +34,28 @@ class MarsRoverImplTest {
         MarsRoverImpl rover = new MarsRoverImpl(0, 0, Direction.NORTH, planet);
         Position pos = rover.move(command);
         assertTrue(PlanetMapImpl.compPos(Position.of(x, y, d), pos));
+    }
+    
+    @ParameterizedTest
+    @CsvFileSource(resources="/MarsRoverImplDetectObstacle.csv")
+    void testDetectObstacle(int roverX, int roverY, int obsNoX, int obsNoY, int obsOkX, int obsOkY, int idDir, int range) {
+        MarsRoverImpl rover = new MarsRoverImpl(roverX, roverY, Direction.NORTH, planet);
+
+        // When TIRE SANS OBSTACLE
+        String[] obs = {Integer.toString(obsNoX), Integer.toString(obsNoY)};
+        planet.setObstaclePositions(obs);
+        int[] posRover = {roverX,roverY};
+        Position pos = rover.detectObstacle(posRover, idDir, range);
+        // Then
+        assertNull(pos);
+
+       
+        // When TIRE A L'EST AVEC OBSTACLE avec range 1
+        obs[0] = Integer.toString(obsOkX);obs[1]=Integer.toString(obsOkY);
+        planet.setObstaclePositions(obs);
+        pos = rover.detectObstacle(posRover, idDir, range);
+        // Then
+        assertNotNull(pos);  
     }
 }
 

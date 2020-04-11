@@ -1,5 +1,9 @@
 package com.esiea.tp4A;
 
+import java.util.Iterator;
+import java.util.Set;
+
+
 public class MarsRoverImpl implements MarsRover {
     private PlanetMapImpl map;
     private Position position;
@@ -34,6 +38,7 @@ public class MarsRoverImpl implements MarsRover {
         Direction d = position.getDirection();
         for (int idx = 0; idx < command.length(); idx++) {
             int dirIdx = d.ordinal(), inc = (dirIdx < 2) ? -1 : 1; // juste pour les deux premiers cas
+            detectObstacle(xy, dirIdx, 1);
             switch (command.charAt(idx)) {
                 case 'f':
                     inc = inc * -1;
@@ -47,6 +52,8 @@ public class MarsRoverImpl implements MarsRover {
                 case 'r':
                     d = Direction.values()[(dirIdx + 1) % 4];
                     break;
+                case 's':
+                	
             }
         }
         return Position.of(map.convert(xy[0], 0), map.convert(xy[1], 1), d); // tester ca aussi
@@ -54,6 +61,36 @@ public class MarsRoverImpl implements MarsRover {
     
     public Position getPosition() {
         return position;
+    }
+    
+    public Position detectObstacle(int[] pos, int dirIdx, int range) {
+    	Set<Position> obstacles = map.obstaclePositions();
+    	Iterator<Position> it = obstacles.iterator();
+    	while(it.hasNext()){
+            Position current = it.next();
+            
+            for(int i = 1 ; i <= range ; i++){
+                switch(dirIdx){
+                    case 0:
+                        if(current.getX() == pos[0] && current.getY() == map.convert(pos[1]+i, 1))
+                            return current;
+                        break;
+                    case 1:
+                        if(current.getX() == map.convert(pos[0]+i, 0) && current.getY() == pos[1])
+                            return current;
+                        break;
+                    case 2:
+                        if(current.getX() == pos[0] && current.getY() == map.convert(pos[1]-i, 1))
+                            return current;
+                        break;
+                    case 3:
+                        if(current.getX() == map.convert(pos[0]-i, 0) && current.getY() == pos[1])
+                            return current;
+                        break;
+                }
+            }
+        }
+        return null;
     }
 }
 
