@@ -69,5 +69,15 @@ class MarsRoverImplTest {
         assertTrue(pos.getY() == trueEndY);
         assertTrue(pos.getDirection() == trueEndD);
     }
+    
+    @Test
+    void testMoveWithObstacle(){
+        MarsRoverImpl rover = new MarsRoverImpl(0, 0, Direction.NORTH, planet);
+        String[] obs = {"0", "1"};
+        planet.setObstaclePositions(obs);
+        assertTrue(planet.obstaclePositions().size() == 1);
+        Position pos = rover.move("s");
+        assertTrue(planet.obstaclePositions().size() == 0);
+    }
 }
 
