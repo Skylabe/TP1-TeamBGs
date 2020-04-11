@@ -38,23 +38,22 @@ public class MarsRoverImpl implements MarsRover {
         Direction d = position.getDirection();
         for (int idx = 0; idx < command.length(); idx++) {
             int dirIdx = d.ordinal(), inc = (dirIdx < 2) ? -1 : 1; // juste pour les deux premiers cas
-            detectObstacle(xy, dirIdx, 1);
-            switch (command.charAt(idx)) {
-                case 'f':
-                    inc = inc * -1;
-                case 'b':
-                    xy[(dirIdx + 1) % 2] = xy[(dirIdx + 1) % 2] + inc;
-                    break;
-                case 'l':
-                    dirIdx = (dirIdx == 0) ? 3 : (dirIdx - 1);
-                    d = Direction.values()[dirIdx];
-                    break;
-                case 'r':
-                    d = Direction.values()[(dirIdx + 1) % 4];
-                    break;
-                case 's':
-                	
-            }
+            if(detectObstacle(xy, dirIdx, 1) == null || (detectObstacle(xy, dirIdx, 1) != null && command.charAt(idx) != 'f' && command.charAt(idx) != 'b')){
+                switch (command.charAt(idx)) {
+                    case 'f':
+                        inc = inc * -1;
+                    case 'b':
+                        xy[(dirIdx + 1) % 2] = xy[(dirIdx + 1) % 2] + inc;
+                        break;
+                    case 'l':
+                        dirIdx = (dirIdx == 0) ? 3 : (dirIdx - 1);
+                        d = Direction.values()[dirIdx];
+                        break;
+                    case 'r':
+                        d = Direction.values()[(dirIdx + 1) % 4];
+                        break;
+                }
+            }  
         }
         return Position.of(map.convert(xy[0], 0), map.convert(xy[1], 1), d); // tester ca aussi
     }
