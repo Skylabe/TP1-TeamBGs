@@ -46,5 +46,27 @@ class MarsRoverImplTest {
         Position pos = rover.move(command);
         assertTrue(posEquals(Position.of(x, y, d), pos));
     }
+    
+    @ParameterizedTest
+    @CsvFileSource(resources="/MarsRoverImplDetectObstacle.csv")
+    void testDetectObstacle(int roverX, int roverY, int obsNoX, int obsNoY, int obsOkX, int obsOkY, int idDir, int range) {
+        MarsRoverImpl rover = new MarsRoverImpl(roverX, roverY, Direction.NORTH, planet);
+
+        // When TIRE SANS OBSTACLE
+        String[] obs = {Integer.toString(obsNoX), Integer.toString(obsNoY)};
+        planet.setObstaclePositions(obs);
+        int[] posRover = {roverX,roverY};
+        Position pos = rover.detectObstacle(posRover, idDir, range);
+        // Then
+        assertNull(pos);
+
+       
+        // When TIRE A L'EST AVEC OBSTACLE avec range 1
+        obs[0] = Integer.toString(obsOkX);obs[1]=Integer.toString(obsOkY);
+        planet.setObstaclePositions(obs);
+        pos = rover.detectObstacle(posRover, idDir, range);
+        // Then
+        assertNotNull(pos);  
+    }
 }
 
