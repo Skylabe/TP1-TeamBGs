@@ -12,6 +12,8 @@ Mars_Rover_TeamBGs
 - Bastien **Reys**
 - Gauvain **Bouvart**
 - Maxim **Cadet**
+- Gaëtan **Bekale**
+
 
 ## Présentation du projet
 
@@ -40,9 +42,14 @@ Celle-ci leur devra leur permettre de :
 
 ## Le système original
 **Est-ce que les joueurs intéragiront en temps réel, ou au tour par tour et pourquoi ?**
+
 Pour éviter tout conflits, les joueurs intéragirton au tour par tour. 
 
 **Comment sera stocké l'état (toutes les données permettant de représenter le jeu) ?**
+
+Nous utiliserons une architecture client-serveur distribuée, c’est à dire que les données permettant de représenter le jeu seront réparties sur les différents clients et le serveur gèrera les communications entre les clients. En comparaison avec un système où la base de donnée serait gérée par le serveur cela nous permettra d’économiser de la bande passante au vu du nombre important de joueur.
+
+![image](https://user-images.githubusercontent.com/38248964/79054021-01511c00-7c42-11ea-8004-cbf0c1b45e68.png)
 
 **Comment seront stockées les informations confidentielles des joueurs (emails, etc.)**
 
@@ -51,12 +58,14 @@ Pour éviter tout conflits, les joueurs intéragirton au tour par tour.
 **Comment gérer plusieurs parties par joueurs en même temps ?**
 
 **Que se passera-t-il si un serveur plante ? (considérer la machine / vm / conteneur éteint(e) et inaccessible)**
+
 En cas de panne, le joueur sera redirigé vers une page d'erreur (Erreur 500). 
 
 **Comment les joueurs s'authentifieront et sauvegardent leur progression ?**
 
 
 **Comment gérer une charge imprévue ? (100x plus de joueurs que prévu par ex)**
+
 Afin de ne pas saturer le serveur, une limite de connexion de 50 joueurs est fixée. Au-delà de ce nombre, le serveur reverra vers une page HTML demandant de réessayer de se connecter plus tard.
 
 ## Mise à jour du système 
