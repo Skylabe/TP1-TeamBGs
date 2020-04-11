@@ -52,6 +52,8 @@ public class MarsRoverImpl implements MarsRover {
                     case 'r':
                         d = Direction.values()[(dirIdx + 1) % 4];
                         break;
+                    case 's':
+                    	shoot(xy, dirIdx, 3);
                 }
             }  
         }
@@ -90,6 +92,15 @@ public class MarsRoverImpl implements MarsRover {
             }
         }
         return null;
+    }
+    
+    public void shoot(int[] pos, int dirIdx, int range) {
+    	Position obstaclePosition = detectObstacle(pos, dirIdx, range);
+    	if(obstaclePosition != null) {
+    		Set<Position> obstacles = map.obstaclePositions();
+        	obstacles.remove(obstaclePosition);
+    	}
+    	
     }
 }
 
