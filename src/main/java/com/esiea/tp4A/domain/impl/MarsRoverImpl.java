@@ -68,21 +68,22 @@ public class MarsRoverImpl implements MarsRover {
     	Iterator<Position> it = obstacles.iterator();
     	while(it.hasNext()){
             Position current = it.next();
+            
             for(int i = 1 ; i <= range ; i++){
-                switch(current.getDirection()){
-                    case Direction.NORTH:
+                switch(dirIdx){
+                    case 0:
                         if(current.getX() == pos[0] && current.getY() == map.convert(pos[1]+i, 1))
                             return current;
                         break;
-                    case Direction.EAST:
+                    case 1:
                         if(current.getX() == map.convert(pos[0]+i, 0) && current.getY() == pos[1])
                             return current;
                         break;
-                    case Direction.SOUTH:
+                    case 2:
                         if(current.getX() == pos[0] && current.getY() == map.convert(pos[1]-i, 1))
                             return current;
                         break;
-                    case Direction.WEST:
+                    case 3:
                         if(current.getX() == map.convert(pos[0]-i, 0) && current.getY() == pos[1])
                             return current;
                         break;
