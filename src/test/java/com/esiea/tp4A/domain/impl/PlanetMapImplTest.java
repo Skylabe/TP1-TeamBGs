@@ -1,12 +1,10 @@
 package com.esiea.tp4A;
-
-
 import java.util.Set;
 import java.util.Iterator;
-
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -17,24 +15,27 @@ class PlanetMapImplTest{
     PlanetMapImpl planet = new PlanetMapImpl(planetDims);
     
     @ParameterizedTest
+    @CsvFileSource(resources="/planetMapImplComparePositions.csv")
+    void testComparePositions(int x1, int y1, Direction d1, int x2, int y2, Direction d2) {
+        if ((x1 == x2) && (y1 == y2) && (d1 == d2))
+            assertTrue(PlanetMapImpl.compPos(Position.of(x1, y1, d1), Position.of(x2, y2, d2)));
+        else
+            assertFalse(PlanetMapImpl.compPos(Position.of(x1, y1, d1), Position.of(x2, y2, d2)));
+    }
+    
+    @ParameterizedTest
     @CsvSource({
         "1 1",
-        "4 7 85 2 64 555",
-    }) // tester erreurs
+        "4 7 85 2 64 555"
+    })
     void testObstaclePositions(String args){
-        String[] coordsObstacles = args.split(" "); Set<Position> planetObstacles = planet.obstaclePositions(); int nbObstacles = coordsObstacles.length / 2;
-        planet.setObstaclePositions(coordsObstacles);
-        assertEquals((nbObstacles), planetObstacles.size());
-        Iterator<Position> itPlanetObs = planetObstacles.iterator();
-        for (int idx = 0; idx < nbObstacles; idx += 2) {
-            Position posObstacle = itPlanetObs.next();
-            //System.out.println("checker ici");
-            System.out.println("checker ici");
-            System.out.println("checker ici"); // chelou mais sans ca ca marche pas (en ajoutant ou suppr une ligne) tester sur autre editeur
-            int x = Integer.parseInt(coordsObstacles[idx]); int y = Integer.parseInt(coordsObstacles[idx + 1]);
-            assertEquals(x, posObstacle.getX());
-            assertEquals(y, posObstacle.getY());
-            assertEquals(Direction.NORTH, posObstacle.getDirection());
+        String[] coordsObstacles = args.split(" "); planet.setObstaclePositions(coordsObstacles);
+        Set<Position> planetObstacles = planet.obstaclePositions(); boolean success;
+        assertEquals((coordsObstacles.length / 2), planetObstacles.size());
+        for (int idx = 0; idx < coordsObstacles.length; idx += 2) {
+            success = false; int x = Integer.parseInt(coordsObstacles[idx]); int y = Integer.parseInt(coordsObstacles[idx + 1]);
+            for (Position pos : planetObstacles) success = (success == true) ? true : PlanetMapImpl.compPos(Position.of(x, y, Direction.NORTH), pos);
+            assertTrue(success);
         }
     }
 

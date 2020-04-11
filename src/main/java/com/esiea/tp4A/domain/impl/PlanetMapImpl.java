@@ -5,7 +5,7 @@ import java.util.HashSet;
 
 public class PlanetMapImpl implements PlanetMap {
     private final int[] size;
-    private Set<Position> obstacles = new HashSet<Position>();
+    private final Set<Position> obstacles = new HashSet<Position>();
 
     public PlanetMapImpl(int[] size) {
         this.size = size;
@@ -19,6 +19,12 @@ public class PlanetMapImpl implements PlanetMap {
     @Override
     public Set<Position> obstaclePositions() {
         return obstacles;
+    }
+
+    public static boolean compPos(Position posRef, Position posComp) {
+        if ((posRef.getX() != posComp.getX()) || (posRef.getY() != posComp.getY()) || (posRef.getDirection() != posComp.getDirection()))
+            return false;
+        return true;
     }
     
     public int[] getSize() {
