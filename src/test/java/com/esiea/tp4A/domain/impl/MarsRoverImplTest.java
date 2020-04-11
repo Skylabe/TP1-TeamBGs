@@ -57,5 +57,17 @@ class MarsRoverImplTest {
         // Then
         assertNotNull(pos);  
     }
+    
+    @ParameterizedTest
+    @CsvFileSource(resources="/MarsRoverImplMoveWithObstacle.csv")
+    void testMoveWithObstacle(int roverX, int roverY, Direction d, int posX, int posY, String command, int trueEndX, int trueEndY, Direction trueEndD){
+        MarsRoverImpl rover = new MarsRoverImpl(roverX, roverY, d, planet);
+        String[] obs = {Integer.toString(posX), Integer.toString(posY)};
+        planet.setObstaclePositions(obs);
+        Position pos = rover.move(command);
+        assertTrue(pos.getX() == trueEndX);
+        assertTrue(pos.getY() == trueEndY);
+        assertTrue(pos.getDirection() == trueEndD);
+    }
 }
 
