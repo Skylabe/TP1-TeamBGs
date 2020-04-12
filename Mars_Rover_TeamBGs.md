@@ -57,6 +57,8 @@ Les informations sensibles comme les adresses emails des utilisateurs bénéfici
 
 **Comment gérer plusieurs parties en même temps ?**
 
+Afin de pouvoir mettre en place ce service il faudra générer automatiquement, pour chaque partie, une version unique des données nécessaires au déroulement d’une partie de jeu, les données de la partie en question seront communiquées aux 50 joueurs y participants et elles seront alors gérées par les clients et le serveur pour cette partie.
+
 **Comment gérer plusieurs parties par joueurs en même temps ?**
 
 **Que se passera-t-il si un serveur plante ? (considérer la machine / vm / conteneur éteint(e) et inaccessible)**
