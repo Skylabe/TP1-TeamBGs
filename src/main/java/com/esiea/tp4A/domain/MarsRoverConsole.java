@@ -22,7 +22,7 @@ public class MarsRoverConsole {
         Position newPos; String newCommand = "";
         while (!newCommand.equals("end")) {
             newCommand = scan.nextLine();
-            newPos = rover.move(newCommand);
+            rover.setPosition(rover.move(newCommand));
             rover.updateMap(rover.getMap());
         }
     }
@@ -34,10 +34,10 @@ public class MarsRoverConsole {
         }
         return null;
     }
-    
+
     public static void main(String[] args) {
         try{
-            String[] coordsObstacles = Arrays.copyOfRange(args, 5, args.length);
+            String[] coordsObstacles = Arrays.copyOfRange(args, 6, args.length);
             new MarsRoverConsole(Integer.parseInt(args[0]), Integer.parseInt(args[1]), stringToDirection(args[2]),
             Integer.parseInt(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]), coordsObstacles);
         } catch (NumberFormatException | java.lang.ArrayIndexOutOfBoundsException | java.lang.NullPointerException e) {

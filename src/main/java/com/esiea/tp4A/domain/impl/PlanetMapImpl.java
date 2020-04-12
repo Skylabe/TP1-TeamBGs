@@ -40,5 +40,13 @@ public class PlanetMapImpl implements PlanetMap {
             convCoord = sign * size[axisIdx] % convCoord;
         } return convCoord;
     }
+    
+    public boolean findObstacle(int x, int y) {
+        for (Position obstacle : obstacles) {
+            if (obstacle.getX() == x && obstacle.getY() == y)
+                return true;
+        }
+        return false;
+    }
 }
 
