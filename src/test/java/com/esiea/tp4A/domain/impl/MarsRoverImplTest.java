@@ -19,11 +19,6 @@ class MarsRoverImplTest {
         assertTrue(PlanetMapImpl.compPos(Position.of(x, y, d), rover.getPosition()));
     }
 
-//    default MarsRover testUpdateMap(PlanetMap map) {
-//    
-//        return this;
-//    }
-
     @ParameterizedTest
     @CsvFileSource(resources="/MarsRoverImplLaser.csv")
     void testConfigureLaserRange(int range, String obstacle, int nbObsRem) {
