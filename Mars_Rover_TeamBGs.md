@@ -53,6 +53,8 @@ Nous utiliserons une architecture client-serveur distribuée, c’est à dire qu
 
 **Comment seront stockées les informations confidentielles des joueurs (emails, etc.)**
 
+Les informations sensibles comme les adresses emails des utilisateurs bénéficieront d’un chiffrement SSL standard, nous avons également pensés à utiliser un algorithme de hachage pour les mots de passe afin qu’ils ne soient pas lisible directement dans les données et en donc renforcé la sécurité.
+
 **Comment gérer plusieurs parties en même temps ?**
 
 **Comment gérer plusieurs parties par joueurs en même temps ?**
@@ -66,7 +68,7 @@ En cas de panne, le joueur sera redirigé vers une page d'erreur (Erreur 500).
 
 **Comment gérer une charge imprévue ? (100x plus de joueurs que prévu par ex)**
 
-Afin de ne pas saturer le serveur, une limite de connexion de 50 joueurs est fixée. Au-delà de ce nombre, le serveur reverra vers une page HTML demandant de réessayer de se connecter plus tard.
+Afin de ne pas saturer le serveur, une limite de connexion de 50 joueurs est fixée. Au-delà de ce nombre, le serveur renverra vers une page HTML demandant de réessayer de se connecter plus tard.
 
 ## Mise à jour du système 
 **Comment faire pour éviter la coupure de service ?**
