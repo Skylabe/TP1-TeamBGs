@@ -25,9 +25,9 @@ Le jeu génèrera en aléatoire les paramètres suivants :
 
 
 - taille de la carte (petite 100x100, moyenne 300x300, grande 600x600)
-- positions des obstacles sur la carte (15% du terrain doit etre constitué d'obstacles)
+- positions des obstacles sur la carte (15% du terrain doit être constitué d'obstacles)
 - positions des 50 joueurs
-- portée du laser (courte 5, moyenne 30, infinie -> risque d'auto-destruction si le tir fait le tour de la planete)
+- portée du laser (courte 5, moyenne 30, infinie -> risque d'autodestruction si le tir fait le tour de la planète)
 
 Les joueurs pourront interagir avec le jeu à travers une interface web.
 Celle-ci leur devra leur permettre de :
@@ -60,6 +60,8 @@ Les informations sensibles comme les adresses emails des utilisateurs bénéfici
 Afin de pouvoir mettre en place ce service il faudra générer automatiquement, pour chaque partie, une version unique des données nécessaires au déroulement d’une partie de jeu, les données de la partie en question seront communiquées aux 50 joueurs y participants et elles seront alors gérées par les clients et le serveur pour cette partie.
 
 **Comment gérer plusieurs parties par joueurs en même temps ?**
+
+Dans le cas de la gestion de plusieurs parties par joueurs il faudra coupler le système décrit à la question précédente à un système d’authentification des parties afin qu’il soit possible de les identifier individuellement. Avec les données d’authentifications des utilisateurs nous seront alors en mesure de déterminer quel joueur joue à quelle partie et ainsi nous pourrons leur offrir la possibilité de lancer plusieurs parties simultanément sans qu’elles interfèrent les unes avec les autres.
 
 **Que se passera-t-il si un serveur plante ? (considérer la machine / vm / conteneur éteint(e) et inaccessible)**
 
