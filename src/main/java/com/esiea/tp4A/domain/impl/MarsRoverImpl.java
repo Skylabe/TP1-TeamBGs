@@ -21,14 +21,6 @@ public class MarsRoverImpl implements MarsRover {
         for (int y = this.map.getSize()[1]/2; y > -this.map.getSize()[1]; y--) {
             String line = "";
             for (int x = -this.map.getSize()[0]/2; x < this.map.getSize()[0]; x++)
-//            if  (this.map.findObstacle(x, y))
-//                line += "X";
-//            else
-//                line += (x == position.getX() && y == position.getY()) ? "O" : " ";
-//            else if (x == position.getX() && y == position.getY())
-//                line += "O";
-//            else
-//                line += " ";
                 line += (this.map.findObstacle(x, y)) ? "X" : ((x == position.getX() && y == position.getY()) ? "O" : " ");
             System.out.println(line);
         } return this;
