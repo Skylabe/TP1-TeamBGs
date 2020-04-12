@@ -12,7 +12,7 @@ public class RoverConfig {
 	public static PlanetMapImpl planet;
 
 	public static void newPlayer(String nom) {
-		MarsRoverImpl rover = new MarsRoverImpl(0, 0, Direction.NORTH, planet);
+		MarsRoverImpl rover = new MarsRoverImpl(0, 0, Direction.NORTH, planet, 3);
 		RoverConfig.players.add(new Pair(nom, rover));
 	}
 }

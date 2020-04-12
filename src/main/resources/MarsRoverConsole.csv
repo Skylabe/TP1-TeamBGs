@@ -1,9 +1,9 @@
-51, 38, TEST, 1 1
-51, EMPTY, TEST, 1 1
-1, 1, NORTH,
-1, 1, NORTH, 1
-1, 1, NORTH, 1 8 6
-1, 1, NORTH, 1 1
-1, 1, SOUTH, 1 1
-1, 1, EAST, 1 1
-1, 1, WEST, 1 1
+51, 38, TEST, 3, 1 1
+51, EMPTY, TEST, 3, 1 1
+1, 1, NORTH, 3,
+1, 1, NORTH, 3, 1
+1, 1, NORTH, 3, 1 8 6
+1, 1, NORTH, 3, 1 1
+1, 1, SOUTH, 3, 1 1
+1, 1, EAST, 3, 1 1
+1, 1, WEST, 3, 1 1
