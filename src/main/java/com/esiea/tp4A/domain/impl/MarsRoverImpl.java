@@ -20,7 +20,12 @@ public class MarsRoverImpl implements MarsRover {
 
     @Override
     public MarsRover updateMap(PlanetMap map) {
-        return this;
+        for (int x = 0; x < this.map.getSize()[0]; x++) {
+            String line = "";
+            for (int y = 0; y < this.map.getSize()[1]; y++) {
+                 line += (this.map.findObstacle(x, y)) ? ((x == position.getX() && y == position.getY()) ? " " : "H") : "X";
+            } System.out.println(line);
+        } return this;
     }
 
     @Override
