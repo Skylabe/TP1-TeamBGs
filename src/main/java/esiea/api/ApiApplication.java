@@ -7,12 +7,19 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import esiea.api.RoverConfig;
+import com.esiea.tp4A.PlanetMapImpl;
 
 @SpringBootApplication
 public class ApiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiApplication.class, args);
+		int[] size = {50,50};
+		RoverConfig.planet = new PlanetMapImpl(size);
+		String[] obstacles = {"0", "2", "2", "0"};
+		RoverConfig.planet.setObstaclePositions(obstacles);
+		
 	}
     
     

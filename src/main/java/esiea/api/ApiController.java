@@ -17,10 +17,12 @@ public class ApiController {
 	
 	@RequestMapping("/co/{pseudo}")
 	public ResponseDTO nouveauPerso(@PathVariable String pseudo) {
-		
+		RoverConfig.newPlayer(pseudo);
 		PlayerDTO player = new PlayerDTO(pseudo);
-		LocalMapDTO localMap = new LocalMapDTO();
+		LocalMapDTO localMap = new LocalMapDTO(pseudo);
 		ResponseDTO res = new ResponseDTO(player, localMap);
+		
+		
 		return res;
 	}
 

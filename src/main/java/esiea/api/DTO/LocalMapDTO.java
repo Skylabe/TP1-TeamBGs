@@ -3,6 +3,8 @@ package esiea.api;
 import com.esiea.tp4A.Direction;
 import com.esiea.tp4A.Position;
 
+import esiea.api.RoverConfig;
+
 import java.util.Set;
 import java.util.List;
 import java.util.HashSet;
@@ -13,9 +15,15 @@ public class LocalMapDTO {
 	Set<Position> obstacles;
 	List<OtherPlayer> players;
 	
-	public LocalMapDTO() {
-		this.obstacles = new HashSet<Position>();
+	public LocalMapDTO(String pseudo) {
+		this.obstacles = RoverConfig.planet.obstaclePositions();
 		this.players = new ArrayList<OtherPlayer>();
+		for(Pair player : RoverConfig.players) {
+			
+			if(!player.pseudo.equals(pseudo)) {
+				this.players.add(new OtherPlayer(new PlayerDTO(player.pseudo, player.rover)));
+			}
+		}
 	}
 
 	public Set<Position> getObstacles() {

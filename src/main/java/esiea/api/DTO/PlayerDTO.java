@@ -2,6 +2,7 @@ package esiea.api;
 
 import com.esiea.tp4A.Position;
 import com.esiea.tp4A.Direction;
+import com.esiea.tp4A.MarsRoverImpl;
 
 public class PlayerDTO {
 	String name;
@@ -13,6 +14,13 @@ public class PlayerDTO {
 		this.name = pseudo;
 		this.status = RoverStatusEnum.ALIVE;
 		this.position = Position.of(0, 0, Direction.NORTH);
+		this.laserRange = 3;
+	}
+	
+	public PlayerDTO(String pseudo, MarsRoverImpl rover) {
+		this.name = pseudo;
+		this.status = RoverStatusEnum.ALIVE;
+		this.position = rover.getPosition();
 		this.laserRange = 3;
 	}
 	
@@ -51,7 +59,7 @@ public class PlayerDTO {
 		this.position = position;
 	}
 
-	public int getLaseRanger() {
+	public int getLaserRange() {
 		return laserRange;
 	}
 
