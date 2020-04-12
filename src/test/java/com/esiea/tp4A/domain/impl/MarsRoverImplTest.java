@@ -33,7 +33,7 @@ class MarsRoverImplTest {
     @CsvFileSource(resources="/MarsRoverImplMove.csv")
     void testMove(int x, int y, Direction d, String command) {
         MarsRoverImpl rover = new MarsRoverImpl(0, 0, Direction.NORTH, planet);
-        Position pos = rover.move(command);
+        Position pos = rover.move(command, planet);
         assertTrue(PlanetMapImpl.compPos(Position.of(x, y, d), pos));
     }
     
@@ -46,7 +46,7 @@ class MarsRoverImplTest {
         String[] obs = {Integer.toString(obsNoX), Integer.toString(obsNoY)};
         planet.setObstaclePositions(obs);
         int[] posRover = {roverX,roverY};
-        Position pos = rover.detectObstacle(posRover, idDir, range);
+        Position pos = rover.detectObstacle(posRover, idDir, range, planet);
         // Then
         assertNull(pos);
 
@@ -54,7 +54,7 @@ class MarsRoverImplTest {
         // When TIRE A L'EST AVEC OBSTACLE avec range 1
         obs[0] = Integer.toString(obsOkX);obs[1]=Integer.toString(obsOkY);
         planet.setObstaclePositions(obs);
-        pos = rover.detectObstacle(posRover, idDir, range);
+        pos = rover.detectObstacle(posRover, idDir, range, planet);
         // Then
         assertNotNull(pos);  
     }
@@ -65,7 +65,7 @@ class MarsRoverImplTest {
         MarsRoverImpl rover = new MarsRoverImpl(roverX, roverY, d, planet);
         String[] obs = {Integer.toString(posX), Integer.toString(posY)};
         planet.setObstaclePositions(obs);
-        Position pos = rover.move(command);
+        Position pos = rover.move(command,planet);
         assertTrue(pos.getX() == trueEndX);
         assertTrue(pos.getY() == trueEndY);
         assertTrue(pos.getDirection() == trueEndD);
@@ -77,7 +77,7 @@ class MarsRoverImplTest {
         String[] obs = {"0", "1"};
         planet.setObstaclePositions(obs);
         assertTrue(planet.obstaclePositions().size() == 1);
-        Position pos = rover.move("s");
+        Position pos = rover.move("s", planet);
         assertTrue(planet.obstaclePositions().size() == 0);
     }
 }

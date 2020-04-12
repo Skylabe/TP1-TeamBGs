@@ -33,12 +33,12 @@ public class MarsRoverImpl implements MarsRover {
 //        return this;
 //    }
 
-    public Position move(String command) {
+    public Position move(String command, PlanetMapImpl map) {
         int[] xy = {position.getX(), position.getY()};
         Direction d = position.getDirection();
         for (int idx = 0; idx < command.length(); idx++) {
             int dirIdx = d.ordinal(), inc = (dirIdx < 2) ? -1 : 1; // juste pour les deux premiers cas
-            if(detectObstacle(xy, dirIdx, 1) == null || (detectObstacle(xy, dirIdx, 1) != null && command.charAt(idx) != 'f' && command.charAt(idx) != 'b')){
+            if(detectObstacle(xy, dirIdx, 1, map) == null || (detectObstacle(xy, dirIdx, 1, map) != null && command.charAt(idx) != 'f' && command.charAt(idx) != 'b')){
                 switch (command.charAt(idx)) {
                     case 'f':
                         inc = inc * -1;
@@ -53,7 +53,7 @@ public class MarsRoverImpl implements MarsRover {
                         d = Direction.values()[(dirIdx + 1) % 4];
                         break;
                     case 's':
-                    	shoot(xy, dirIdx, 3);
+                    	shoot(xy, dirIdx, 3, map);
                 }
             }  
         }
@@ -64,7 +64,11 @@ public class MarsRoverImpl implements MarsRover {
         return position;
     }
     
-    public Position detectObstacle(int[] pos, int dirIdx, int range) {
+    public void setPosition(Position position) {
+    	this.position = position;
+    }
+    
+    public Position detectObstacle(int[] pos, int dirIdx, int range, PlanetMapImpl map) {
     	Set<Position> obstacles = map.obstaclePositions();
     	Iterator<Position> it = obstacles.iterator();
     	while(it.hasNext()){
@@ -94,8 +98,8 @@ public class MarsRoverImpl implements MarsRover {
         return null;
     }
     
-    public void shoot(int[] pos, int dirIdx, int range) {
-    	Position obstaclePosition = detectObstacle(pos, dirIdx, range);
+    public void shoot(int[] pos, int dirIdx, int range, PlanetMapImpl map) {
+    	Position obstaclePosition = detectObstacle(pos, dirIdx, range, map);
     	if(obstaclePosition != null) {
     		Set<Position> obstacles = map.obstaclePositions();
         	obstacles.remove(obstaclePosition);

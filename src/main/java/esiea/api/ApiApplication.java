@@ -15,7 +15,7 @@ public class ApiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiApplication.class, args);
-		int[] size = {50,50};
+		int[] size = {10,10};
 		RoverConfig.planet = new PlanetMapImpl(size);
 		String[] obstacles = {"0", "2", "2", "0"};
 		RoverConfig.planet.setObstaclePositions(obstacles);
