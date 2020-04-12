@@ -1,9 +1,16 @@
-0, 1, NORTH, f
-0, -1, NORTH, b
-0, 0, WEST, l
-0, 0, EAST, r
--1, 1, WEST, flf
--1, -1, SOUTH, blfl
-1, 1, SOUTH, brblfrffrb
-1, 1, SOUTH, brblfrffrb
-1, 0, NORTH, fflbrfllbbbbrfffffrbb
+0, 1, NORTH, f,
+0, -1, NORTH, b,
+0, 0, WEST, l,
+0, 0, EAST, r,
+-1, 1, WEST, flf,
+-1, -1, SOUTH, blfl,
+1, 1, SOUTH, brblfrffrb,
+1, 1, SOUTH, brblfrffrb,
+1, 0, NORTH, fflbrfllbbbbrfffffrbb,
+1, 2, SOUTH, ffflblbb, 0 1 1 -2
+1, 1, EAST, lflfrfrffrfff, -1 0 -1 -1 2 1
+0, 1, NORTH, ffsf, -2 0 -1 2 0 2 0 1
+0, 2, NORTH, fssff, -2 0 -1 2 0 2 0 1
+0, -1, NORTH, b, -2 0 -1 2 0 2 0 1
+2, 1, NORTH, rsrsffsflbbbblfff, 2 0 1 -2 0 -2 0 -1
+-2,1, NORTH, bbbllsfflfffrrrsb, -2 0 -1 2 0 2 0 1
