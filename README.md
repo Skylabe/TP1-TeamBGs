@@ -19,5 +19,15 @@ This will make appear two obstacles in (1, 1) and in (2, 1) in a map of 5x5 case
 
 ## Launch the tests
 Test all the project:  
-```mvn test```  
+```mvn test```
 
+## Launch the API
+Launch the server with the api:
+```./mvnw spring-boot:run```
+
+###List of API's command
+
+localhost:8080/co/[pseudo] : Create rover
+localhost:8080/status/[pseudo] : Return status of the rover
+localhost:8080/command/[pseudo]/command : Launch commands of the rover
+(List of command : f (go forward), b (go back), l (turn left), r (turn right), s (shoot to detroy obstacle)

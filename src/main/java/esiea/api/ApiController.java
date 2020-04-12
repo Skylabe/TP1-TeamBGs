@@ -12,10 +12,6 @@ import com.esiea.tp4A.Position;
 @RestController
 public class ApiController {
 
-	@RequestMapping("/test")
-	public String index() {
-		return "API En Route";
-	}
 	
 	@RequestMapping("/co/{pseudo}")
 	public ResponseDTO nouveauPerso(@PathVariable String pseudo) {
@@ -61,5 +57,4 @@ public class ApiController {
 		}
 		return null;
 	}
-
 }
