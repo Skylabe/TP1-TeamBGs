@@ -34,7 +34,7 @@ public class PlanetMapImpl implements PlanetMap {
     public int convert(int coord, int axisIdx) {
         int convCoord = coord % size[axisIdx];
         if ((coord < 0) && (coord < convCoord)) convCoord++;
-        if (convCoord == -(size[axisIdx] / 2)) convCoord = size[axisIdx] / 2;
+        if ((float) convCoord == -((float) size[axisIdx] / 2)) convCoord = size[axisIdx] / 2;
         else if (Math.abs(convCoord) > (size[axisIdx] / 2)) {
             int sign = (coord > 0) ? -1 : 1;
             convCoord = sign * size[axisIdx] % convCoord;

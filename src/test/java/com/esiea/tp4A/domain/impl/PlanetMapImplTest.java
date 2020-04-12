@@ -11,11 +11,11 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class PlanetMapImplTest{
-    int[] planetDims = {10, 10};
-    PlanetMapImpl planet = new PlanetMapImpl(planetDims);
+    private final int[] planetDims = {10, 10};
+    private final PlanetMapImpl planet = new PlanetMapImpl(planetDims);
     
     @ParameterizedTest
-    @CsvFileSource(resources="/planetMapImplComparePositions.csv")
+    @CsvFileSource(resources="/planetMapImplCompPos.csv")
     void testComparePositions(int x1, int y1, Direction d1, int x2, int y2, Direction d2) {
         if ((x1 == x2) && (y1 == y2) && (d1 == d2))
             assertTrue(PlanetMapImpl.compPos(Position.of(x1, y1, d1), Position.of(x2, y2, d2)));
@@ -29,14 +29,13 @@ class PlanetMapImplTest{
         "4 7 85 2 64 555"
     })
     void testObstaclePositions(String args){
-        String[] coordsObstacles = args.split(" "); planet.setObstaclePositions(coordsObstacles);
-        Set<Position> planetObstacles = planet.obstaclePositions(); boolean success;
-        assertEquals((coordsObstacles.length / 2), planetObstacles.size());
+        String[] coordsObstacles = args.split(" "); Set<Position> planetObstacles = planet.obstaclePositions(); boolean success;
+        planet.setObstaclePositions(coordsObstacles);
         for (int idx = 0; idx < coordsObstacles.length; idx += 2) {
             success = false; int x = Integer.parseInt(coordsObstacles[idx]); int y = Integer.parseInt(coordsObstacles[idx + 1]);
             for (Position pos : planetObstacles) success = (success == true) ? true : PlanetMapImpl.compPos(Position.of(x, y, Direction.NORTH), pos);
             assertTrue(success);
-        }
+        } assertEquals((coordsObstacles.length / 2), planetObstacles.size());
     }
 
     @Test
@@ -46,12 +45,12 @@ class PlanetMapImplTest{
 
     @ParameterizedTest
     @CsvFileSource(resources="/planetMapImplConvert.csv")
-    void testConvert(int coord, int excpectedCoord, int planetDim) {
+    void testConvert(int coord, int expectedCoord, int planetDim) {
         for (int idx = 0; idx < 1; idx++) {
             int[] planetDims = {planetDim, 10};
-            planet = new PlanetMapImpl(planetDims);
+            PlanetMapImpl planet = new PlanetMapImpl(planetDims);
             int retCoord = planet.convert(coord, idx);
-            assertEquals(excpectedCoord, retCoord);
+            assertEquals(expectedCoord, retCoord);
         }
     }
 }
