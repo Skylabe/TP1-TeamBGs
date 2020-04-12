@@ -9,8 +9,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 class MarsRoverActionTest {
-    int[] planetDims = {5, 5};
-    PlanetMapImpl planet = new PlanetMapImpl(planetDims);
+    private final int[] planetDims = {5, 5};
+    private final PlanetMapImpl planet = new PlanetMapImpl(planetDims);
 
     @ParameterizedTest
     @CsvFileSource(resources="/MarsRoverActionRoll.csv")
@@ -34,7 +34,7 @@ class MarsRoverActionTest {
     @ParameterizedTest
     @CsvFileSource(resources="/MarsRoverImplDetectObstacle.csv")
     void testDetectObstacle(int roverX, int roverY, int obsNoX, int obsNoY, int obsOkX, int obsOkY, int idDir, int range) {
-        MarsRoverImpl rover = new MarsRoverImpl(roverX, roverY, Direction.NORTH, planet); int[] posRover = {roverX,roverY};
+        MarsRoverImpl rover = new MarsRoverImpl(roverX, roverY, Direction.NORTH, planet, 3); int[] posRover = {roverX,roverY};
         String[] obs = {Integer.toString(obsNoX), Integer.toString(obsNoY)};// When TIRE SANS OBSTACLE
         planet.setObstaclePositions(obs);
         assertNull(MarsRoverAction.detectObstacle(posRover, Direction.values()[idDir], range, planet));// Then

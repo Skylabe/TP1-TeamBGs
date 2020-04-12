@@ -11,8 +11,8 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class PlanetMapImplTest{
-    int[] planetDims = {10, 10};
-    PlanetMapImpl planet = new PlanetMapImpl(planetDims);
+    private final int[] planetDims = {10, 10};
+    private final PlanetMapImpl planet = new PlanetMapImpl(planetDims);
     
     @ParameterizedTest
     @CsvFileSource(resources="/planetMapImplCompPos.csv")
@@ -45,12 +45,12 @@ class PlanetMapImplTest{
 
     @ParameterizedTest
     @CsvFileSource(resources="/planetMapImplConvert.csv")
-    void testConvert(int coord, int excpectedCoord, int planetDim) {
+    void testConvert(int coord, int expectedCoord, int planetDim) {
         for (int idx = 0; idx < 1; idx++) {
             int[] planetDims = {planetDim, 10};
-            planet = new PlanetMapImpl(planetDims);
+            PlanetMapImpl planet = new PlanetMapImpl(planetDims);
             int retCoord = planet.convert(coord, idx);
-            assertEquals(excpectedCoord, retCoord);
+            assertEquals(expectedCoord, retCoord);
         }
     }
 }

@@ -12,26 +12,23 @@ class MarsRoverConsoleTest {
     // Permet de tester que le main ne leve pas d'erreur en cas de mauvais arguments et de faire des simulations
     @ParameterizedTest
     @CsvFileSource(resources = "/MarsRoverConsole.csv")
-    void testMain(String x, String y, String d, String obstacles) {
-        String[] args = {x, y, d, "5", "5"};
+    void testMain(String x, String y, String d, String laserRange, String obstacles) {
+        String[] args = {x, y, d, laserRange, "5", "5"};
         for (int idx = 0; idx < 3; idx++) {
             if (args[idx].equals("EMPTY"))
                 args[idx] = null;
         }
-        // Simule l'input de l'utilisateur, possibilite d'ajouter les inputs a executer en argument depuis un csv dedie
-        // dans src/main/resources
-        String userInput = "end\r\n";
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        System.setIn(new ByteArrayInputStream("end\r\n".getBytes()));
         MarsRoverConsole.main((String.join(" ", args) + " " + obstacles).split(" "));
     }
     
     // Optionnel
     @ParameterizedTest
     @CsvFileSource(resources = "/MarsRoverConsole.csv", numLinesToSkip = 5)
-    void testMain(int x, int y, Direction d, String osbtacles) {
+    void testConstructor(int x, int y, Direction d, int laserRange, String osbtacles) {
         String userInput = "end\r\n";
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        new MarsRoverConsole(x, y, d, 5, 5, osbtacles.split(" "));
+        new MarsRoverConsole(x, y, d, laserRange, 5, 5, osbtacles.split(" "));
     }
 
     @Test

@@ -3,45 +3,45 @@ package com.esiea.tp4A;
 public class MarsRoverImpl implements MarsRover {
     private final PlanetMapImpl map;
     private final Position position;
+    private final int laserRange;
 
-    public MarsRoverImpl(int x, int y, Direction dir, PlanetMapImpl map) {
-        position = Position.of(x, y, dir);
+    public MarsRoverImpl(int x, int y, Direction dir, PlanetMapImpl map, int laserRange) {
         this.map = map;
-        //this.initialize(position);
+        this.laserRange = laserRange;
+        position = Position.of(x, y, dir);
+        this.initialize(position);
     }
 
-    /*public MarsRover initialize(Position position) {
-        //map = new PlanetMapImpl();
-        position = position;
-        //map = new PlanetMap(100, 100);
+    @Override
+    public MarsRover initialize(Position position) {
+        System.out.println("f avancer\nb reculer\nl pivoter a gauche\nr pivoter a droite\n'end' pour stopper");
         return this;
-    }*/
+    }
 
-// checker ici si la position retournee par move appartient a l'un des obstacles de la map
-// Si non, affecter a "this.position" la valeur retournee par move
-// Si la taille de la planete fait 100x100 et que le rover passe de (0,50,N) a 51, la fonction doit se charger de mettre
-// -49 a la place
-//    default MarsRover updateMap(PlanetMap map) {
-//        return this;
-//    }
+    @Override
+    public MarsRover updateMap(PlanetMap map) {
+        return this;
+    }
 
-//    default MarsRover configureLaserRange(int range) {
-//        return this;
-//    }
+    @Override
+    public MarsRover configureLaserRange(int range) {
+        return new MarsRoverImpl(position.getX(), position.getY(), position.getDirection(), map, range);
+    }
 
+    @Override
     public Position move(String command) {
         int[] xy = {position.getX(), position.getY()}; Direction d = position.getDirection();
         for (int idx = 0; idx < command.length(); idx++) {
             xy = (MarsRoverAction.detectObstacle(xy, moveDirection(command.charAt(idx), d), 1, map) == null) ? MarsRoverAction.roll(xy, d, command.charAt(idx)) : xy;
             d = MarsRoverAction.rotate(d, command.charAt(idx));
-            if (command.charAt(idx) == 's') MarsRoverAction.shoot(xy, d, 3, map);
+            if (command.charAt(idx) == 's') MarsRoverAction.shoot(xy, d, laserRange, map);
         }
         return Position.of(map.convert(xy[0], 0), map.convert(xy[1], 1), d);
     }
     
-    public Position getPosition() {
-        return position;
-    }
+    public Position getPosition() { return position;}
+    
+    public PlanetMap getMap() { return map;}
     
     public static Direction moveDirection(char letter, Direction d) {
         if (letter == 'b')
